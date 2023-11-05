@@ -1,16 +1,18 @@
-import Lottie from "lottie-react";
 import bannerImage from "../../../assets/loginLottie.json";
+import Lottie from "lottie-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { FaFacebookSquare } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = (e) => {
+import { FaFacebookSquare } from "react-icons/fa";
+const SignUp = () => {
+  const handleSignUp = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    const form = e.target;
+    const userName = form.userName.value;
+    const profileImage = form.profileImage.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(userName, profileImage, email, password);
   };
   return (
     <div className="hero min-h-[86vh] bg-[#FFF2DE] font-lato">
@@ -20,9 +22,37 @@ const Login = () => {
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mr-10 ">
           <h1 className="text-5xl font-extrabold text-[#361e31]  text-center mt-5">
-            login
+            Signup
           </h1>
-          <form onSubmit={handleLogin} className="card-body">
+          <form onSubmit={handleSignUp} className="card-body">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-[#361e31] font-semibold">
+                  Username
+                </span>
+              </label>
+              <input
+                name="userName"
+                type="text"
+                placeholder="username"
+                className="input input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-[#361e31] font-semibold">
+                  Profile image
+                </span>
+              </label>
+              <input
+                name="profileImage"
+                type="text"
+                placeholder="image link"
+                className="input input-bordered"
+                required
+              />
+            </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text text-[#361e31] font-semibold">
@@ -30,7 +60,7 @@ const Login = () => {
                 </span>
               </label>
               <input
-                onChange={(e) => setEmail(e.target.value)}
+                name="email"
                 type="email"
                 placeholder="email"
                 className="input input-bordered"
@@ -44,7 +74,7 @@ const Login = () => {
                 </span>
               </label>
               <input
-                onChange={(e) => setPassword(e.target.value)}
+                name="password"
                 type="password"
                 placeholder="password"
                 className="input input-bordered"
@@ -61,15 +91,15 @@ const Login = () => {
             </div>
             <div>
               <p className="text-[#361e31] font-semibold">
-                new here? go to{" "}
-                <Link to={"/signup"} className="text-sky-500">
-                  register
+                Already have an account? go to{" "}
+                <Link to={"/login"} className="text-sky-500">
+                  login
                 </Link>
               </p>
             </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary rounded-full bg-[#f7881f] border-none text-white shadow-xl hover:text-[#f7881f] hover:bg-white ">
-                Login
+                Signup
               </button>
             </div>
           </form>
@@ -99,4 +129,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
