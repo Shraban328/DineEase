@@ -1,16 +1,25 @@
 import Lottie from "lottie-react";
 import bannerImage from "../../../assets/loginLottie.json";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import useAuth from "../../../utilities/useAuth";
 const Login = () => {
+  const { userLogin } = useAuth();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
     console.log(email, password);
+    userLogin(email, password)
+      .then((userCredential) => {
+        console.log({ fromLogin: userCredential.user });
+        navigate("/");
+      })
+      .catch((error) => console.error(error));
   };
   return (
     <div className="hero min-h-[86vh] bg-[#FFF2DE] font-lato">

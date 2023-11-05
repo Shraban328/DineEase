@@ -1,10 +1,14 @@
 import bannerImage from "../../../assets/loginLottie.json";
 import Lottie from "lottie-react";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookSquare } from "react-icons/fa";
+import useAuth from "../../../utilities/useAuth";
+import { updateProfile } from "firebase/auth";
+import auth from "../../../Config/firebase.config";
 const SignUp = () => {
+  const { userSignUp } = useAuth();
+  const navigate = useNavigate();
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -13,6 +17,16 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(userName, profileImage, email, password);
+    userSignUp(email, password)
+      .then((userCredential) => {
+        console.log({ fromSignUp: userCredential.user });
+        updateProfile(auth.currentUser, {
+          displayName: userName,
+          photoURL: profileImage,
+        });
+        navigate("/");
+      })
+      .catch((error) => console.error(error));
   };
   return (
     <div className="hero min-h-[86vh] bg-[#FFF2DE] font-lato">
