@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo_png.png";
 const Navbar = () => {
   const navLinks = (
-    <div className="font-semibold flex space-x-3 text-[#161713]">
+    <div className="font-semibold flex space-x-3 text-[#361e31]">
       <li>
         <NavLink to={"/"}>Home</NavLink>
       </li>
@@ -48,7 +48,7 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center">
             <div className="flex items-center">
               <img src={logo} alt="" className="w-14" />
-              <a className="btn btn-ghost normal-case text-xl font-bold mr-3">
+              <a className="btn text-[#361e31] btn-ghost normal-case text-xl font-bold mr-3">
                 DineEase
               </a>
             </div>
@@ -56,7 +56,10 @@ const Navbar = () => {
           </div>
         </div>
         <div className="navbar-end">
-          <Link to={"/login"} className="font-semibold">
+          <Link
+            to={"/login"}
+            className="bg-[#361e31] p-3 rounded-lg font-semibold text-white"
+          >
             Login
           </Link>
         </div>
