@@ -14,6 +14,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     console.log(email, password);
+
     userLogin(email, password)
       .then((userCredential) => {
         console.log({ fromLogin: userCredential.user });

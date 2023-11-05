@@ -6,8 +6,10 @@ import { FaFacebookSquare } from "react-icons/fa";
 import useAuth from "../../../utilities/useAuth";
 import { updateProfile } from "firebase/auth";
 import auth from "../../../Config/firebase.config";
+import { useState } from "react";
 const SignUp = () => {
   const { userSignUp } = useAuth();
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -17,6 +19,18 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(userName, profileImage, email, password);
+
+    setErrorMessage("");
+    if (password.length < 6) {
+      setErrorMessage("Password Must be at least 6 characters long");
+      return;
+    } else if (!/(?=.*?[A-Z])(?=.*?[#?!@$%^&*-]).{6,}/.test(password)) {
+      setErrorMessage(
+        "Password must include an uppercase letter and a special character "
+      );
+      return;
+    }
+
     userSignUp(email, password)
       .then((userCredential) => {
         console.log({ fromSignUp: userCredential.user });
@@ -26,7 +40,12 @@ const SignUp = () => {
         });
         navigate("/");
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error.message);
+        if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+          setErrorMessage("email already in use");
+        }
+      });
   };
   return (
     <div className="hero min-h-[86vh] bg-[#FFF2DE] font-lato">
@@ -102,6 +121,11 @@ const SignUp = () => {
                   Forgot password?
                 </a>
               </label>
+              <div>
+                <span className="font-semibold text-rose-700">
+                  {errorMessage}
+                </span>
+              </div>
             </div>
             <div>
               <p className="text-[#361e31] font-semibold">
