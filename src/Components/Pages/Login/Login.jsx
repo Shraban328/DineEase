@@ -18,7 +18,6 @@ const Login = () => {
     userLogin(email, password)
       .then((userCredential) => {
         console.log({ fromLogin: userCredential.user });
-
         navigate("/");
       })
       .catch((error) => console.error(error));
