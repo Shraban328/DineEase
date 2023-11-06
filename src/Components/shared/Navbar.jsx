@@ -1,6 +1,17 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo_png.png";
+import useAuth from "../../utilities/useAuth";
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+  console.log(user);
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        console.log("Logout Successfull");
+      })
+      .catch((error) => console.error(error));
+  };
+
   const navLinks = (
     <div className="font-semibold flex space-x-3 text-[#361e31]">
       <li>
@@ -56,12 +67,58 @@ const Navbar = () => {
           </div>
         </div>
         <div className="navbar-end">
-          <Link
-            to={"/login"}
-            className="bg-[#361e31] p-3 rounded-lg font-semibold text-white"
-          >
-            Login
-          </Link>
+          {user && (
+            <div className="flex gap-2 items-center mr-2">
+              <p className="font-semibold text-lg text-[#361e31]">
+                {user?.displayName}
+              </p>
+
+              <div className="dropdown dropdown-end dropdown-hover">
+                <label tabIndex={0} className="m-1">
+                  <div className="w-14 rounded-xl">
+                    <img src={user?.photoURL} />
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                  <li className="text-[#361e31] font-semibold  hover:bg-[#361e31]  rounded-lg">
+                    <Link className="hover:text-gray-300" to={"/my-foods"}>
+                      My added food items
+                    </Link>
+                  </li>
+                  <li className="text-[#361e31] font-semibold  hover:bg-[#361e31]  rounded-lg">
+                    <Link className="hover:text-gray-300" to={"/add-food"}>
+                      Add a food item
+                    </Link>
+                  </li>
+                  <li className="text-[#361e31] font-semibold  hover:bg-[#361e31]  rounded-lg">
+                    <Link className="hover:text-gray-300" to={"/my-orders"}>
+                      My ordered food items
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          )}
+          {user ? (
+            <button
+              onClick={handleLogout}
+              className="bg-[#361e31] p-3 rounded-lg font-semibold text-white"
+            >
+              logout
+            </button>
+          ) : (
+            <>
+              <Link
+                to={"/login"}
+                className="bg-[#361e31] p-3 rounded-lg font-semibold text-white"
+              >
+                Login
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>
