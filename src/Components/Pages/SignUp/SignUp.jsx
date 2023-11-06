@@ -7,10 +7,14 @@ import useAuth from "../../../utilities/useAuth";
 import { updateProfile } from "firebase/auth";
 import auth from "../../../Config/firebase.config";
 import { useState } from "react";
+import axiosInstance from "../../../api/axiosInstance";
+import toast from "react-hot-toast";
+
 const SignUp = () => {
-  const { userSignUp } = useAuth();
+  const { userSignUp, setUser, user } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -18,7 +22,6 @@ const SignUp = () => {
     const profileImage = form.profileImage.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(userName, profileImage, email, password);
 
     setErrorMessage("");
     if (password.length < 6) {
@@ -34,10 +37,24 @@ const SignUp = () => {
     userSignUp(email, password)
       .then((userCredential) => {
         console.log({ fromSignUp: userCredential.user });
+
+        // profile update
         updateProfile(auth.currentUser, {
           displayName: userName,
           photoURL: profileImage,
         });
+        setUser({ ...user, displayName: userName, photoURL: profileImage });
+        // req in server side
+        const userInfo = {
+          userName,
+          image: profileImage,
+          email,
+          password,
+        };
+        axiosInstance
+          .post("/users", userInfo)
+          .then((res) => console.log(res.data));
+        toast.success("Registration Complete!");
         navigate("/");
       })
       .catch((error) => {

@@ -36,7 +36,6 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         setLoading(false);
         setUser(currentUser);
-        console.log(currentUser);
       } else {
         setUser(null);
       }
@@ -48,6 +47,7 @@ const AuthProvider = ({ children }) => {
 
   const authInfo = {
     user,
+    setUser,
     loading,
     userSignUp,
     userLogin,
