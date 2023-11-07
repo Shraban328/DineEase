@@ -1,5 +1,8 @@
+import UpdateFood from "./UpdateFood";
+
 const FoodRow = ({ food }) => {
   const { image, foodName, origin, price, quantity } = food;
+  const myFood = food;
   return (
     <tr>
       <td>
@@ -20,7 +23,7 @@ const FoodRow = ({ food }) => {
       </td>
       <td>{quantity}</td>
       <th>
-        <button className="btn btn-ghost ">Update</button>
+        <UpdateFood food={myFood} />
       </th>
     </tr>
   );

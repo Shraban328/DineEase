@@ -5,6 +5,8 @@ import Login from "../Components/Pages/Login/Login";
 import SignUp from "../Components/Pages/SignUp/SignUp";
 import AddFood from "../Components/Pages/AddFood/AddFood";
 import MyFoods from "../Components/Pages/MyFoods/MyFoods";
+import Explore from "../Components/Pages/Explore/Explore";
+import axiosInstance from "../api/axiosInstance";
 const Routes = createBrowserRouter([
   {
     path: "/",
@@ -29,6 +31,10 @@ const Routes = createBrowserRouter([
       {
         path: "/my-foods",
         element: <MyFoods />,
+      },
+      {
+        path: "/explore",
+        element: <Explore />,
       },
     ],
   },

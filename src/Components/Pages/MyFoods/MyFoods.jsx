@@ -1,10 +1,8 @@
 import spinner from "../../../assets/spinner.json";
 import Lottie from "lottie-react";
-import useAuth from "../../../utilities/useAuth";
 import useMyFoods from "../../../Hooks/useMyFoods";
 import FoodRow from "./FoodRow";
 const MyFoods = () => {
-  const { loading } = useAuth();
   const myFoods = useMyFoods();
   const titles = (
     <>
@@ -14,7 +12,7 @@ const MyFoods = () => {
       <th>Update</th>
     </>
   );
-  if (loading) {
+  if (!myFoods) {
     return (
       <div className="h-screen flex justify-center items-center">
         <Lottie className="w-1/6" animationData={spinner} />
@@ -22,7 +20,7 @@ const MyFoods = () => {
     );
   }
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto font-lato">
       <table className="table">
         {/* head */}
         <thead>
@@ -30,7 +28,7 @@ const MyFoods = () => {
         </thead>
         <tbody>
           {/* row 1 */}
-          {myFoods.map((food) => (
+          {myFoods?.map((food) => (
             <FoodRow key={food._id} food={food} />
           ))}
         </tbody>

@@ -14,15 +14,6 @@ const AddFood = () => {
   const [description, setDescription] = useState("");
   const handleAdd = (e) => {
     e.preventDefault();
-    console.log(
-      foodName,
-      image,
-      category,
-      origin,
-      quantity,
-      price,
-      description
-    );
     const foodInfo = {
       userName: user.displayName,
       userEmail: user.email,
