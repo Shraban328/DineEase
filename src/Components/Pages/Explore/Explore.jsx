@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../../../api/axiosInstance";
 import FoodCard from "./FoodCard";
-
+import spinner from "../../../assets/spinner.json";
+import Lottie from "lottie-react";
 const Explore = () => {
-  const [allFoods, setAllFoods] = useState([]);
+  const [allFoods, setAllFoods] = useState(null);
   const [count, setCount] = useState(0);
   const [currentPageNumber, setCurrentPageNumber] = useState(0);
   const pageNumber = Math.ceil(count / 9);
@@ -11,7 +12,6 @@ const Explore = () => {
 
   useEffect(() => {
     axiosInstance.get(`/foods`).then((res) => {
-      console.log("from all foods: ", res.data);
       setCount(res.data.length);
     });
   }, [currentPageNumber]);
@@ -20,10 +20,17 @@ const Explore = () => {
     axiosInstance
       .get(`/foods/explore?currentPage=${currentPageNumber}`)
       .then((res) => {
-        console.log(res.data);
         setAllFoods(res.data);
       });
   }, [currentPageNumber]);
+
+  if (!allFoods) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <Lottie className="w-1/6" animationData={spinner} />
+      </div>
+    );
+  }
 
   return (
     <div className="mt-24 max-w-screen-xl mx-auto ">

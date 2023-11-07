@@ -1,16 +1,8 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const FoodCard = ({ food }) => {
-  const {
-    _id,
-    quantity,
-    price,
-    origin,
-    image,
-    foodName,
-    description,
-    category,
-  } = food;
+  const { _id, quantity, price, origin, image, foodName, category } = food;
   const loveReactIcon = (
     <>
       {" "}
@@ -55,9 +47,12 @@ const FoodCard = ({ food }) => {
         </p>
 
         <div className="card-actions justify-end">
-          <button className="btn btn-ghost rounded-full bg-[#f7881f] border-none text-white shadow-xl hover:text-[#f7881f] hover:bg-white ">
+          <Link
+            to={`/explore/food-details/${_id}`}
+            className="btn btn-ghost rounded-full bg-[#f7881f] border-none text-white shadow-xl hover:text-[#f7881f] hover:bg-white "
+          >
             Details
-          </button>
+          </Link>
         </div>
       </div>
     </div>

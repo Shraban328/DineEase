@@ -6,6 +6,7 @@ import SignUp from "../Components/Pages/SignUp/SignUp";
 import AddFood from "../Components/Pages/AddFood/AddFood";
 import MyFoods from "../Components/Pages/MyFoods/MyFoods";
 import Explore from "../Components/Pages/Explore/Explore";
+import FoodDetails from "../Components/Pages/FoodDetails/FoodDetails";
 const Routes = createBrowserRouter([
   {
     path: "/",
@@ -34,6 +35,10 @@ const Routes = createBrowserRouter([
       {
         path: "/explore",
         element: <Explore />,
+      },
+      {
+        path: "/explore/food-details/:id",
+        element: <FoodDetails />,
       },
     ],
   },
