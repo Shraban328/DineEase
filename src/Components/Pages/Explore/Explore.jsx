@@ -35,7 +35,7 @@ const Explore = () => {
 
   return (
     <div className="mt-24 max-w-screen-xl mx-auto ">
-      <SearchBar />
+      <SearchBar setAllFoods={setAllFoods} />
       <div className="grid grid-cols-3 gap-4 ">
         {allFoods.map((food) => (
           <FoodCard key={food._id} food={food} />
