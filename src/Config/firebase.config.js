@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDxjthxfhShgpsfSXe0Oh7AYJd3xdTwSNc",
-  authDomain: "dine-ease-e3120.firebaseapp.com",
-  projectId: "dine-ease-e3120",
-  storageBucket: "dine-ease-e3120.appspot.com",
-  messagingSenderId: "446292388271",
-  appId: "1:446292388271:web:2d487ce4a0f6b45026a75a",
+  apiKey: import.meta.env.VITE_APIKEY,
+  authDomain: import.meta.env.VITE_AUTHDOMAIN,
+  projectId: import.meta.env.VITE_PROJECTID,
+  storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_APPID,
 };
 
 // Initialize Firebase
