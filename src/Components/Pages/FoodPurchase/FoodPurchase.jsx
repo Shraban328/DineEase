@@ -1,14 +1,16 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../../api/axiosInstance";
 import { useEffect, useState } from "react";
 import useAuth from "../../../utilities/useAuth";
+import toast from "react-hot-toast";
 
 const FoodPurchase = () => {
   const { user } = useAuth();
-  const [food, setFood] = useState([]);
   const { id } = useParams();
-
-  const buyingDate = Date();
+  const navigate = useNavigate();
+  const [food, setFood] = useState([]);
+  const [orderQuantity, setOrderQuantity] = useState(0);
+  const buyingDate = Date().slice(0, 15);
   const {
     _id,
     quantity,
@@ -25,6 +27,30 @@ const FoodPurchase = () => {
       setFood(res.data);
     });
   }, [id]);
+
+  const handleConfirmOrder = () => {
+    const orderInfo = {
+      customerName: user.displayName,
+      customerEmail: user.email,
+      foodName,
+      price,
+      quantity: orderQuantity,
+      buyingDate,
+    };
+    if (orderQuantity <= quantity) {
+      axiosInstance.post("/orders", orderInfo).then((res) => {
+        console.log(res.data);
+        toast.success("Order Confirmed");
+      });
+      axiosInstance
+        .put(`/foods/${_id}`, {
+          updatedQuantity: quantity - orderQuantity,
+        })
+        .then(() => navigate("/"));
+    } else {
+      toast.error("not available");
+    }
+  };
   return (
     <div
       className={`hero min-h-[50vh] w-screen font-lato text-[#361e31] font-lato `}
@@ -38,9 +64,7 @@ const FoodPurchase = () => {
               <h2 className="font-normal text-[15px]">
                 Name: {user?.displayName} / Email: {user?.email}
               </h2>
-              <h2 className="font-normal text-[15px]">
-                Date: {buyingDate.slice(0, 15)}
-              </h2>
+              <h2 className="font-normal text-[15px]">Date: {buyingDate}</h2>
             </div>
             <h2 className="text-xl font-bold">{foodName}</h2>
             <div>
@@ -49,6 +73,7 @@ const FoodPurchase = () => {
                 <span className="font-normal">{quantity}</span>
               </p>
               <input
+                onChange={(e) => setOrderQuantity(parseInt(e.target.value))}
                 type="text"
                 placeholder="quantity"
                 className="input input-bordered w-1/2 max-w-xs"
@@ -60,7 +85,10 @@ const FoodPurchase = () => {
             </div>
 
             <div className="card-actions ">
-              <Link className="btn btn-ghost w-32 rounded-2xl bg-[#f7881f] border-none text-white shadow-xl hover:text-[#f7881f] hover:bg-white ">
+              <Link
+                onClick={handleConfirmOrder}
+                className="btn btn-ghost w-32 rounded-2xl bg-[#f7881f] border-none text-white shadow-xl hover:text-[#f7881f] hover:bg-white "
+              >
                 Confirm Order
               </Link>
             </div>
