@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 import UpdateFood from "./UpdateFood";
 import PropTypes from "prop-types";
 const FoodRow = ({ food }) => {
-  const { image, foodName, origin, price, quantity, buyingDate } = food;
+  const { _id, image, foodName, origin, price, quantity, buyingDate } = food;
   const myFood = food;
   return (
     <tr>
@@ -26,7 +27,9 @@ const FoodRow = ({ food }) => {
         <th>{buyingDate}</th>
       ) : (
         <th>
-          <UpdateFood food={myFood} />
+          <Link to={`/update-food/${_id}`} className="btn btn-ghost">
+            Update
+          </Link>
         </th>
       )}
     </tr>

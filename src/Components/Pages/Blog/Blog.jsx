@@ -25,7 +25,7 @@ const Blog = () => {
           manager for Node.js. NPM is used to install, manage, and distribute
           Node.js packages and modules. It provides a command-line interface for
           developers to install libraries and packages from the NPM registry,
-          manage project dependencies, and run scripts defined in a project's
+          manage project dependencies, and run scripts defined in a projects
           package.json file. NPM is a vital tool for Node.js developers to
           efficiently manage project dependencies and access a vast ecosystem of
           open-source packages.
