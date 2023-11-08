@@ -9,6 +9,7 @@ import Explore from "../Components/Pages/Explore/Explore";
 import FoodDetails from "../Components/Pages/FoodDetails/FoodDetails";
 import FoodPurchase from "../Components/Pages/FoodPurchase/FoodPurchase";
 import MyOrders from "../Components/Pages/MyOrders/MyOrders";
+import Blog from "../Components/Pages/Blog/Blog";
 const Routes = createBrowserRouter([
   {
     path: "/",
@@ -49,6 +50,10 @@ const Routes = createBrowserRouter([
       {
         path: "/my-orders",
         element: <MyOrders />,
+      },
+      {
+        path: "/blogs",
+        element: <Blog />,
       },
     ],
   },
