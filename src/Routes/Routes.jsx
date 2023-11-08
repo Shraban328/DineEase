@@ -11,10 +11,12 @@ import FoodPurchase from "../Components/Pages/FoodPurchase/FoodPurchase";
 import MyOrders from "../Components/Pages/MyOrders/MyOrders";
 import Blog from "../Components/Pages/Blog/Blog";
 import UpdateFood from "../Components/Pages/MyFoods/UpdateFood";
+import ErrorPage from "../Components/Pages/ErrorPage/ErrorPage";
 const Routes = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
