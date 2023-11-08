@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import UpdateFood from "./UpdateFood";
 import PropTypes from "prop-types";
-const FoodRow = ({ food }) => {
+const FoodRow = ({ food, handleDelete }) => {
   const { _id, image, foodName, origin, price, quantity, buyingDate } = food;
-  const myFood = food;
+
   return (
     <tr>
       <td>
@@ -24,13 +23,18 @@ const FoodRow = ({ food }) => {
       </td>
       <td>{quantity}</td>
       {buyingDate ? (
-        <th>{buyingDate}</th>
+        <td>{buyingDate}</td>
       ) : (
-        <th>
+        <td>
           <Link to={`/update-food/${_id}`} className="btn btn-ghost">
             Update
           </Link>
-        </th>
+        </td>
+      )}
+      {buyingDate && (
+        <button onClick={() => handleDelete(_id)} className="btn btn-ghost">
+          Delete
+        </button>
       )}
     </tr>
   );
@@ -40,4 +44,5 @@ export default FoodRow;
 
 FoodRow.propTypes = {
   food: PropTypes.object,
+  handleDelete: PropTypes.func,
 };

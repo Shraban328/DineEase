@@ -25,7 +25,7 @@ const SearchBar = ({ setAllFoods }) => {
         <input
           name="searchText"
           type="text"
-          placeholder="search"
+          placeholder="search by category"
           className="input border-[1px] border-[#361e31] w-full max-w-xs rounded-r-none"
         />
         <button className="btn btn-primary rounded-l-none bg-[#361e31] border-none text-white">
