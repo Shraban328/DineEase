@@ -5,8 +5,7 @@ import axiosInstance from "../../../api/axiosInstance";
 const FoodDetails = () => {
   const [food, setFood] = useState([]);
   const { id } = useParams();
-  const bgUrl =
-    "https://img.freepik.com/free-vector/color-doodle-food-burger-pattern_1409-3918.jpg?w=1380&t=st=1699393397~exp=1699393997~hmac=473e73af9d07eb1ed3318842cbb6e09fcbb6686f1027f665e6387d8f8c96dfbc";
+  const bgUrl = "https://i.ibb.co/KhXzqZ1/food-Detail-img-avif.jpg";
   const {
     _id,
     quantity,
@@ -26,9 +25,12 @@ const FoodDetails = () => {
 
   return (
     <div
-      className={`hero min-h-[81vh] bg-base-200 font-lato text-[#361e31] bg-[url('${bgUrl}')]`}
+      className={`hero min-h-[81vh] font-lato text-[#361e31] `}
+      style={{
+        backgroundImage: `url("https://i.ibb.co/KhXzqZ1/food-Detail-img-avif.jpg")`,
+      }}
     >
-      <div className="hero-content flex-col lg:flex-row bg-[#FFF2DE] rounded-lg ">
+      <div className="hero-content flex-col lg:flex-row bg-[#FFF2DE] border-8 border-[#4a3445] p-11 rounded-lg ">
         <div className="w-1/2">
           <img src={image} className="rounded-lg shadow-2xl" />
           <p>{description}</p>

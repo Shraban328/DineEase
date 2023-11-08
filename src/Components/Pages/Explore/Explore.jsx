@@ -3,6 +3,7 @@ import axiosInstance from "../../../api/axiosInstance";
 import FoodCard from "./FoodCard";
 import spinner from "../../../assets/spinner.json";
 import Lottie from "lottie-react";
+import SearchBar from "./SearchBar";
 const Explore = () => {
   const [allFoods, setAllFoods] = useState(null);
   const [count, setCount] = useState(0);
@@ -34,6 +35,7 @@ const Explore = () => {
 
   return (
     <div className="mt-24 max-w-screen-xl mx-auto ">
+      <SearchBar />
       <div className="grid grid-cols-3 gap-4 ">
         {allFoods.map((food) => (
           <FoodCard key={food._id} food={food} />
