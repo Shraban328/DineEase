@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axiosInstance from "../../../api/axiosInstance";
-
 const FoodDetails = () => {
   const [food, setFood] = useState([]);
   const { id } = useParams();
-  const bgUrl = "https://i.ibb.co/KhXzqZ1/food-Detail-img-avif.jpg";
   const {
     _id,
     quantity,
@@ -52,10 +50,10 @@ const FoodDetails = () => {
 
           <div className="card-actions ">
             <Link
-              to={`/explore/food-details/${_id}`}
+              to={`/food-purchase/${_id}`}
               className="btn btn-ghost w-32 rounded-2xl bg-[#f7881f] border-none text-white shadow-xl hover:text-[#f7881f] hover:bg-white "
             >
-              buy
+              order
             </Link>
           </div>
         </div>
