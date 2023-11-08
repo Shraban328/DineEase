@@ -1,27 +1,29 @@
-import spinner from "../../../assets/spinner.json";
 import Lottie from "lottie-react";
-import useMyFoods from "../../../Hooks/useMyFoods";
-import FoodRow from "./FoodRow";
-const MyFoods = () => {
-  const myFoods = useMyFoods();
+import useOrderedFoods from "../../../Hooks/useOrderedFoods";
+import FoodRow from "../MyFoods/FoodRow";
+import spinner from "../../../assets/spinner.json";
+const MyOrders = () => {
+  const orderedFoods = useOrderedFoods();
+  console.log(orderedFoods);
+
   const titles = (
     <>
       <th>Name</th>
       <th>Price</th>
-      <th>quantity</th>
-      <th>Update</th>
+      <th>Quantity</th>
+      <th>Order Date</th>
     </>
   );
-  if (!myFoods) {
+  if (!orderedFoods) {
     return (
       <div className="h-screen flex justify-center items-center">
         <Lottie className="w-1/6" animationData={spinner} />
       </div>
     );
-  } else if (myFoods.length === 0) {
+  } else if (orderedFoods.length === 0) {
     return (
       <div className="h-screen flex justify-center items-center">
-        <h1 className="text-[#361e31] text-2xl font-bold">No Item Added</h1>
+        <h1 className="text-[#361e31] text-2xl font-bold">No orders</h1>
       </div>
     );
   }
@@ -34,7 +36,7 @@ const MyFoods = () => {
         </thead>
         <tbody>
           {/* row 1 */}
-          {myFoods?.map((food) => (
+          {orderedFoods?.map((food) => (
             <FoodRow key={food._id} food={food} />
           ))}
         </tbody>
@@ -47,4 +49,4 @@ const MyFoods = () => {
   );
 };
 
-export default MyFoods;
+export default MyOrders;

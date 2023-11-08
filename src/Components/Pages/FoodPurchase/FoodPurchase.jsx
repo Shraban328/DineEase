@@ -11,16 +11,7 @@ const FoodPurchase = () => {
   const [food, setFood] = useState([]);
   const [orderQuantity, setOrderQuantity] = useState(0);
   const buyingDate = Date().slice(0, 15);
-  const {
-    _id,
-    quantity,
-    price,
-    origin,
-    image,
-    foodName,
-    description,
-    category,
-  } = food;
+  const { _id, quantity, price, image, foodName } = food;
   useEffect(() => {
     axiosInstance.get(`/foods/food/${id}`).then((res) => {
       console.log(res.data);
@@ -32,6 +23,7 @@ const FoodPurchase = () => {
     const orderInfo = {
       customerName: user.displayName,
       customerEmail: user.email,
+      image,
       foodName,
       price,
       quantity: orderQuantity,

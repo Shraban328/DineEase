@@ -1,7 +1,7 @@
 import UpdateFood from "./UpdateFood";
-
+import PropTypes from "prop-types";
 const FoodRow = ({ food }) => {
-  const { image, foodName, origin, price, quantity } = food;
+  const { image, foodName, origin, price, quantity, buyingDate } = food;
   const myFood = food;
   return (
     <tr>
@@ -22,11 +22,19 @@ const FoodRow = ({ food }) => {
         <span className="badge badge-ghost badge-lg">{price} TK</span>
       </td>
       <td>{quantity}</td>
-      <th>
-        <UpdateFood food={myFood} />
-      </th>
+      {buyingDate ? (
+        <th>{buyingDate}</th>
+      ) : (
+        <th>
+          <UpdateFood food={myFood} />
+        </th>
+      )}
     </tr>
   );
 };
 
 export default FoodRow;
+
+FoodRow.propTypes = {
+  food: PropTypes.object,
+};
