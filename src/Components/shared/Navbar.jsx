@@ -13,12 +13,16 @@ const Navbar = () => {
   };
 
   const navLinks = (
-    <div className="font-semibold flex space-x-3 text-[#361e31]">
+    <div className="font-semibold flex  xl:flex-row md:w-52 space-x-3 text-[#361e31]">
       <li>
         <NavLink to={"/"}>Home</NavLink>
       </li>
       <li>
-        <NavLink to={"/explore"}>Explore</NavLink>
+        {user ? (
+          <NavLink to={"/explore"}>Explore</NavLink>
+        ) : (
+          <NavLink to={"/login"}>Explore</NavLink>
+        )}
       </li>
       <li>
         <NavLink to={"/blogs"}>Blogs</NavLink>
@@ -51,18 +55,18 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box xl:w-52"
             >
               {navLinks}
             </ul>
           </div>
-          <div className="hidden lg:flex items-center">
-            <div className="flex items-center">
-              <img src={logo} alt="" className="w-14" />
-              <a className="btn text-[#361e31] btn-ghost normal-case text-xl font-bold mr-3">
-                DineEase
-              </a>
-            </div>
+          <div className="flex items-center">
+            <img src={logo} alt="" className="w-14" />
+            <a className="btn text-[#361e31] btn-ghost normal-case md:text-lg xl:text-xl font-bold mr-3">
+              DineEase
+            </a>
+          </div>
+          <div className="hidden lg:flex md:gap-9 xl:gap-0 items-center">
             <ul className="menu menu-horizontal px-1">{navLinks}</ul>
           </div>
         </div>

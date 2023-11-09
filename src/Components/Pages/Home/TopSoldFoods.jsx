@@ -17,7 +17,7 @@ const TopSoldFoods = () => {
   return (
     <div className="max-w-screen-xl mx-auto my-12 font-lato">
       <h1 className="text-5xl font-bold mb-6">Top in the area</h1>
-      <div className="grid grid-cols-3  gap-6">
+      <div className="grid md:grid-cols-2 xl:grid-cols-3  gap-6">
         {topFoods?.map((food) => (
           <TopFoodCard key={food.id[0]} food={food} />
         ))}
